@@ -1,19 +1,20 @@
-# bikeHelmetCommands
-Smart helmet recognizes voice commands to drive LEDs
-
-Name of author, link to github repo with project work in / link to Edge Impulse projects
+![Cover Photo](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
 
 ## Introduction
-- an overview of what the project does
-- your inspiration for making the project 
-- examples that it is based on. 
+The inspiration for this project came from iterating on [@djdunc's](xxx) gesture detection model for driving a smart helmet. The decision to switch the detection model to audio classification was done in order to get a more consistent result that limited the amount of false positives, and made the experience safer and completely "hands free" for the user.
 
-*Tip: probably ~200 words and images are good!*
+This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip in the helmet for hands free turn signalling using the keywords **"right"** and **"left"**. Muliple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
+
+### Edge Impulse Models
+- [Single Keyword](https://studio.edgeimpulse.com/studio/198343)
+- [Dual Keyword](https://studio.edgeimpulse.com/studio/198602)
+- [Incremental Keyword](https://studio.edgeimpulse.com/studio/198643)
 
 ## Research Question
-What is the problem you are trying to solve
+This project investigated two questions:
 
-*Tip: probably 1 or 2 sentences*
+1. Is a audio classification model with single keyword detection more accurate than a multi-keywork model?
+2. Does incremental training produce a more accurate model overall when using multiple keywords?
 
 ## Application Overview
 Thinking back to the various application diagrams you have seen through the module - how would you describe an overview of the building blocks of your project - how do they connect, what do the component parts include.
