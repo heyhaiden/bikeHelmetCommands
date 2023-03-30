@@ -1,7 +1,15 @@
-# bikeHelmetCommands
-Smart helmet recognizes voice commands to drive LEDs
+# Bike Helmet Commands
+Smart helmet utilizing Edge Impulse to deploy audio classification model on Arduino Nano 33 BLE Sense
 
-Name of author, link to github repo with project work in / link to Edge Impulse projects
+Haiden McGill 
+
+Edge Impulse Models
+- Single Keyword
+https://studio.edgeimpulse.com/studio/198343
+- Dual Keyword
+https://studio.edgeimpulse.com/studio/198602
+- Incremental Keyword
+https://studio.edgeimpulse.com/studio/198643
 
 ## Introduction
 - an overview of what the project does
