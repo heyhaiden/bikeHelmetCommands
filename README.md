@@ -1,7 +1,11 @@
-# Bike Helmet Commands
-Smart helmet utilizing Edge Impulse to deploy audio classification model on Arduino Nano 33 BLE Sense
+![Cover Photo](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
 
-Haiden McGill 
+## Introduction
+The inspiration for this project came from iterating on @djdunc's gesture detection model for driving a smart helmet. The decision to switch the detection model to audio classification was done in order to get a more consistent result that limited the amount of false positives, and made the experience safer and completely "hands free" for the user.
+
+This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip in the helmet for hands free turn signalling. 
+
+Muliple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
 
 Edge Impulse Models
 - Single Keyword
@@ -10,11 +14,6 @@ https://studio.edgeimpulse.com/studio/198343
 https://studio.edgeimpulse.com/studio/198602
 - Incremental Keyword
 https://studio.edgeimpulse.com/studio/198643
-
-## Introduction
-- an overview of what the project does
-- your inspiration for making the project 
-- examples that it is based on. 
 
 *Tip: probably ~200 words and images are good!*
 
