@@ -3,7 +3,9 @@
 ## Introduction
 The inspiration for this project came from iterating on [@djdunc's](xxx) gesture detection model for driving a smart helmet. The decision to switch the detection model to audio classification was done in order to get a more consistent result that limited the amount of false positives, and made the experience safer and completely "hands free" for the user.
 
-This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip in the helmet for hands free turn signalling using the keywords **"right"** and **"left"**. Muliple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
+This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip in the helmet for hands free turn signalling using the keywords **"right"** and **"left"**. 
+
+Muliple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
 
 ### Edge Impulse Models
 - [Single Keyword](https://studio.edgeimpulse.com/studio/198343)
@@ -13,13 +15,16 @@ This system utilizes Edge Impulse to deploy an audio classification model on an 
 ## Research Question
 This project investigated two questions:
 
-1. Is a audio classification model with single keyword detection more accurate than a multi-keywork model?
+1. Is an audio classification model with single keyword detection more accurate than a multi-keywork model?
 2. Does incremental training produce a more accurate model overall when using multiple keywords?
 
 ## Application Overview
-Thinking back to the various application diagrams you have seen through the module - how would you describe an overview of the building blocks of your project - how do they connect, what do the component parts include.
+Edge Impulse was the key component for the organization and execution of the project. It enabled easy data ingestion and direct capture using the onboard microphone of the Nano BLE Sense. 
 
-*Tip: probably ~200 words and a diagram is usually good to convey your design!*
+![Edge Impulse Workflow](incrementBikeCommand_inferencing/assets/edgeImpulse_diagram.jpg)
+source: [https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse](https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse)
+
+
 
 ## Data
 Describe what data sources you have used and any cleaning, wrangling or organising you have done. Including some examples of the data helps others understand what you have been working with.
@@ -54,9 +59,9 @@ Synthesis the main results and observations you made from building the project. 
 
 ## Declaration of Authorship
 
-I, AUTHORS NAME HERE, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
+I, Haiden McGill, confirm that the work presented in this assessment is my own. Where information has been derived from other sources, I confirm that this has been indicated in the work.
 
 
-*Digitally Sign by typing your name here*
+Haiden McGill
 
-ASSESSMENT DATE
+24 April 2023
