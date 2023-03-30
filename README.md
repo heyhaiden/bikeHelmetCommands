@@ -15,8 +15,6 @@ https://studio.edgeimpulse.com/studio/198602
 - Incremental Keyword
 https://studio.edgeimpulse.com/studio/198643
 
-*Tip: probably ~200 words and images are good!*
-
 ## Research Question
 What is the problem you are trying to solve
 
