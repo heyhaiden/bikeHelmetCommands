@@ -3,9 +3,9 @@
 ## Introduction
 The inspiration for this project came from iterating on [@djdunc's](xxx) gesture detection model for driving a smart helmet. The decision to switch the detection model to audio classification was done in order to get a more consistent result that limited the amount of false positives, and made the experience safer and completely "hands free" for the user.
 
-This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip in the helmet for hands free turn signalling using the keywords **"right"** and **"left"**. 
+This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip for hands free signalling using the keywords **"left"** and **"right"**. 
 
-Muliple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
+Multiple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
 
 ### Edge Impulse Models
 - [Single Keyword](https://studio.edgeimpulse.com/studio/198343)
@@ -15,7 +15,7 @@ Muliple experiments were run in order to determine an optimal model trained spec
 ## Research Question
 This project investigated two questions:
 
-1. Is an audio classification model with single keyword detection more accurate than a multi-keywork model?
+1. Is audio classification detection with a single keyword more accurate than a multi-keyword model?
 2. Does incremental training produce a more accurate model overall when using multiple keywords?
 
 ## Application Overview
@@ -24,6 +24,7 @@ Edge Impulse was the key component for the organization and execution of the pro
 ![Edge Impulse Workflow](incrementBikeCommand_inferencing/assets/edgeImpulse_diagram.jpg)
 source: [https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse](https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse)
 
+This workflow made it possible for continuous iterations with both data training sets and adjustments to the neural network as well. Once the training and testing was complete, Edge Impulse generated a library for the Arduino IDE in order to easily deploy onto my selected board.
 
 
 ## Data
