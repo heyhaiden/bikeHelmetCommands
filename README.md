@@ -7,13 +7,10 @@ This system utilizes Edge Impulse to deploy an audio classification model on an 
 
 Muliple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
 
-Edge Impulse Models
-- Single Keyword
-https://studio.edgeimpulse.com/studio/198343
-- Dual Keyword
-https://studio.edgeimpulse.com/studio/198602
-- Incremental Keyword
-https://studio.edgeimpulse.com/studio/198643
+### Edge Impulse Models
+- [Single Keyword](https://studio.edgeimpulse.com/studio/198343)
+- [Dual Keyword](https://studio.edgeimpulse.com/studio/198602)
+- [Incremental Keyword](https://studio.edgeimpulse.com/studio/198643)
 
 ## Research Question
 What is the problem you are trying to solve
