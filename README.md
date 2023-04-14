@@ -1,11 +1,12 @@
 ![Cover Photo](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
 
 ## Introduction
-The inspiration for this project came from iterating on [@djdunc's](xxx) gesture detection model for driving a smart helmet. The decision to switch the detection model to audio classification was done in order to get a more consistent result that limited the amount of false positives, and made the experience safer and completely "hands free" for the user.
+The inspiration for this project came from iterating on [@djdunc's](https://github.com/djdunc) gesture detection
+model for driving a smart helmet. In order to reduce the number of false positives and create a hands-free experience for the user, this project used an audio classification model.
 
-This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip for hands free signalling using the keywords **"left"** and **"right"**. 
+This system utilizes Edge Impulse to deploy an audio classification model on an Arduino Nano 33 BLE Sense that drives an embedded LED strip for hands-free signaling using the keywords "left" and "right."
 
-Multiple experiments were run in order to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to consistently recognize multiple keywords.
+Multiple experiments were run to determine an optimal model trained specifically for outdoor deployment in a noisy environment, with the ability to recognize multiple keywords consistently.
 
 ### Edge Impulse Models
 - [Single Keyword](https://studio.edgeimpulse.com/studio/198343)
@@ -19,28 +20,61 @@ This project investigated two questions:
 2. Does incremental training produce a more accurate model overall when using multiple keywords?
 
 ## Application Overview
-Edge Impulse was the key component for the organization and execution of the project. It enabled easy data ingestion and direct capture using the onboard microphone of the Nano BLE Sense. 
+Edge Impulse was the key component for the organization and execution of the project. It enabled easy data ingestion and direct capture using the onboard microphone of the Arduino Nano 33 BLE Sense. 
 
 ![Edge Impulse Workflow](incrementBikeCommand_inferencing/assets/edgeImpulse_diagram.jpg)
-source: [https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse](https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse)
+Image: [https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse](https://www.edgeimpulse.com/blog/getting-started-with-edge-impulse)
 
-This workflow made it possible for continuous iterations with both data training sets and adjustments to the neural network as well. Once the training and testing was complete, Edge Impulse generated a library for the Arduino IDE in order to easily deploy onto my selected board.
+This workflow made it possible for continuous iterations with both data training sets and adjustments to the neural network as well. Once the training and testing were complete, Edge Impulse generated a library for the Arduino IDE to deploy onto my selected board easily.
 
 
 ## Data
-Describe what data sources you have used and any cleaning, wrangling or organising you have done. Including some examples of the data helps others understand what you have been working with.
+This project used a combination of sources to build out four data labels: left, right, unknown, and noise. The unknown dataset included randomized single-word keywords that incorporated both numbers and words. The training data included 20 minutes per category, and the final testing data used an additional 5 minutes per category to achieve the recommended 80/20 split.
 
-*Tip: probably ~200 words and images of what the data 'looks like' are good!*
+![DataSpectrograms](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+The first dataset was a series of left and right keyword on-device keyword recordings using the Arduino Nano BLE 33 Sense through Edge Impulse, which saved and stored files directly in the project. Next, that was augmented with the Speech Commands library [1], which provided 20 minutes of data for left, right, unknown, and noise keywords. Additional noise files were pulled from Edge Impulse’s Keywords database [2].
+
+![DataCleaning](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+The most time-consuming portion of the project was cleaning the data to remove any
+bad samples and fix incorrect labeling from the imported datasets. The Speech
+Commands library contained a wide range of accents, ages, and recording quality,
+which led to some overlapping within the data separation feature explorer.
+
+![DataAugmentation](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+Edge Impulse provided further data augmentation options, bolstering the datasets with
+additional noise, time banding, and frequency bands.
 
 ## Model
-This is a Deep Learning project! What model architecture did you use? Did you try different ones? Why did you choose the ones you did?
+A time series model was used for this project, with one audio input axis and a window
+size of 1000ms. The frequency was set to 16000 Hz, optimized to detect spoken
+keywords.
 
-*Tip: probably ~200 words and a diagram is usually good to describe your model!*
+![TimeSeriesModel](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+Both audio processing blocks were used at different points in the project. The Mel
+Frequency Cepstral Coefficient (MFCC) was the primary block since it is specifically
+calibrated to detect human voices. The Mel-filterbank energy (MFE) model was used in
+comparison, as it is more efficient with non-voice audio and detecting multiple
+frequencies.
+The Classification (Keras) block was used to learn the spectrometer patterns for each
+keyword in the model, which was necessary in order to accurately differentiate between
+the model keywords and “unknown” classification.
+
+![DataClassification](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
 
 ## Experiments
-What experiments did you run to test your project? What parameters did you change? How did you measure performance? Did you write any scripts to evaluate performance? Did you use any tools to evaluate performance? Do you have graphs of results? 
+Four separate experiments were run to address the research questions for this project.
 
-*Tip: probably ~300 words and graphs and tables are usually good to convey your results!*
+| Name                | Description                                                                                                                  | Keywords                    | Results                                                        |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------|-----------------------------|----------------------------------------------------------------|
+| Single Command      | Only used one keyword to see how well it could be distinguished from unknown keywords and noise                              | Left, Noise, Unknown        | Training performance: 95% Testing performance: 91%             |
+| Dual Command        | Used both left and right keywords. Trained the model outright seeing how introducing an additional keyword affected accuracy | Left, Right, Noise, Unknown | Training performance: 91% Testing performance: 84%             |
+| Incremental Command | Used left and right keywords. Trained model with left keyword first then retrained by introducing right keyword              | Left, Right, Noise, Unknown | Training performance: 90% Testing performance: 85%             |
+| MFCC vs MFE         | Compared two audio classifier models using one keyword                                                                       | Left, Noise, Unknown        | MFCC Testing: 95% Training: 91% MFE Testing: 82% Training: 63% |
 
 ## Results and Observations
 Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
