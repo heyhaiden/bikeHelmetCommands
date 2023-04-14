@@ -77,18 +77,67 @@ Four separate experiments were run to address the research questions for this pr
 | MFCC vs MFE         | Compared two audio classifier models using one keyword                                                                       | Left, Noise, Unknown        | MFCC Testing: 95% Training: 91% MFE Testing: 82% Training: 63% |
 
 ## Results and Observations
-Synthesis the main results and observations you made from building the project. Did it work perfectly? Why not? What worked and what didn't? Why? What would you do next if you had more time?  
+The most difficult part of this project was sourcing a large enough dataset to train a
+multi-keyword model that could accurately run in a noisy, outdoor setting. Initial training
+of the model was deeply affected by incorrectly labeled samples, and cleaning the
+datasets after import proved very time-consuming. Because the final training and testing
+datasets were so large, it was impossible to correct all files, which brought the final
+training and testing accuracy percentages down. However, when the model was tested
+live on the Arduino Nano 33 BLE Sense, it had a 100% accuracy rating.
 
-*Tip: probably ~300 words and remember images and diagrams bring results to life!*
+![Deployment](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+Recognizing speech over noise requires a minimum of three keywords instead of two:
+the keyword itself, an unknown category of related or unrelated words, and different
+examples of environmental noise. Overall, the model could recognize the “left” keyword
+much more accurately than the “right.” This could be due to the data cleaning issue or
+because the “left” keyword was often much shorter than the “right” keyword, allowing
+fewer windows to be used to detect.
+
+![IncrementalCommand](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+Based on the experiments that were run, having multiple keywords affected the
+accuracy of the model only slightly, and incremental training had the best testing
+outcome of 85% accuracy. Additional performance calibration was added to the
+deployed model that focused on reducing false positives and ignoring “unknown”
+keywords.
+
+![Deployment2](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+The final experiment of comparing the two audio classification models clearly
+demonstrated the preference for the MFCC model when working with the human voice.
+
+![MFCCvsMFE](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+
+Because the training dataset was purposefully difficult, with a large variety of accents,
+dialects, and background noise in the recordings, the live performance of the model was
+significantly more accurate than the percentages shown during training. This level of
+training is ideal for a product that would hopefully be accessible to any English speaker
+regardless of sex, age, or ethnicity. A final recommendation would be to require users of
+the smart helmet to record keyword samples of their own during product setup and
+initialization to add one last layer of optimization on top of the built model.
 
 ## Bibliography
-*If you added any references then add them in here using this format:*
 
-1. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
-
-2. Last name, First initial. (Year published). Title. Edition. (Only include the edition if it is not the first edition) City published: Publisher, Page(s). http://google.com
-
-*Tip: we use [https://www.citethisforme.com](https://www.citethisforme.com) to make this task even easier.* 
+1. Comparison MFCC versus MFE to recognize doorbell ring (2020) Edge Impulse.
+Available at:
+https://forum.edgeimpulse.com/t/comparison-mfcc-versus-mfe-to-recognize-door
+bell-ring/765/4 (Accessed: 23 March 2023).
+2. ‘Introduction to Machine Learning with Edge Impulse’ (no date) Machine Learning
+[Preprint]. Simple audio recognition: Recognizing keywords | TensorFlow Core
+(no date) TensorFlow. Available at:
+https://www.tensorflow.org/tutorials/audio/simple_audio (Accessed: 23 March
+2023).
+3. TinyML Made Easy: Sound Classification (KWS) - Hackster.io (no date).
+Available at:
+https://www.hackster.io/mjrobot/tinyml-made-easy-sound-classification-kws-2fb3a
+b (Accessed: 23 March 2023).
+4. tinyML Summit 2021 tiny Talks: Environmental Noise Classification on
+Microcontrollers (2021). Available at:
+https://www.youtube.com/watch?v=cARhrotq5HA (Accessed: 23 March 2023).
+5. Warden, P. (2018) ‘Speech Commands: A Dataset for Limited-Vocabulary
+Speech Recognition’. arXiv. Available at: http://arxiv.org/abs/1804.03209
+(Accessed: 21 March 2023).
 
 ----
 
