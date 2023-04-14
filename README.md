@@ -31,18 +31,18 @@ This workflow made it possible for continuous iterations with both data training
 ## Data
 This project used a combination of sources to build out four data labels: left, right, unknown, and noise. The unknown dataset included randomized single-word keywords that incorporated both numbers and words. The training data included 20 minutes per category, and the final testing data used an additional 5 minutes per category to achieve the recommended 80/20 split.
 
-![DataSpectrograms](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![DataSpectrograms](incrementBikeCommand_inferencing/assets/DataSpectrogram.jpg)
 
 The first dataset was a series of left and right keyword on-device keyword recordings using the Arduino Nano BLE 33 Sense through Edge Impulse, which saved and stored files directly in the project. Next, that was augmented with the Speech Commands library [1], which provided 20 minutes of data for left, right, unknown, and noise keywords. Additional noise files were pulled from Edge Impulse’s Keywords database [2].
 
-![DataCleaning](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![DataCleaning](incrementBikeCommand_inferencing/assets/DataCleaning.jpg)
 
 The most time-consuming portion of the project was cleaning the data to remove any
 bad samples and fix incorrect labeling from the imported datasets. The Speech
 Commands library contained a wide range of accents, ages, and recording quality,
 which led to some overlapping within the data separation feature explorer.
 
-![DataAugmentation](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![DataAugmentation](incrementBikeCommand_inferencing/assets/DataAugmentation.jpg)
 
 Edge Impulse provided further data augmentation options, bolstering the datasets with
 additional noise, time banding, and frequency bands.
@@ -52,7 +52,7 @@ A time series model was used for this project, with one audio input axis and a w
 size of 1000ms. The frequency was set to 16000 Hz, optimized to detect spoken
 keywords.
 
-![TimeSeriesModel](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![TimeSeriesModel](incrementBikeCommand_inferencing/assets/EdgeImpulse_ModelDesign.PNG)
 
 Both audio processing blocks were used at different points in the project. The Mel
 Frequency Cepstral Coefficient (MFCC) was the primary block since it is specifically
@@ -63,7 +63,7 @@ The Classification (Keras) block was used to learn the spectrometer patterns for
 keyword in the model, which was necessary in order to accurately differentiate between
 the model keywords and “unknown” classification.
 
-![DataClassification](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![DataClassification](incrementBikeCommand_inferencing/assets/DataClassification.jpg)
 
 
 ## Experiments
@@ -85,7 +85,7 @@ datasets were so large, it was impossible to correct all files, which brought th
 training and testing accuracy percentages down. However, when the model was tested
 live on the Arduino Nano 33 BLE Sense, it had a 100% accuracy rating.
 
-![Deployment](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![Deployment](incrementBikeCommand_inferencing/assets/LiveClassification.jpg)
 
 Recognizing speech over noise requires a minimum of three keywords instead of two:
 the keyword itself, an unknown category of related or unrelated words, and different
@@ -94,7 +94,7 @@ much more accurately than the “right.” This could be due to the data cleanin
 because the “left” keyword was often much shorter than the “right” keyword, allowing
 fewer windows to be used to detect.
 
-![IncrementalCommand](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![IncrementalCommand](incrementBikeCommand_inferencing/assets/IncrementalCommand.jpg)
 
 Based on the experiments that were run, having multiple keywords affected the
 accuracy of the model only slightly, and incremental training had the best testing
@@ -102,12 +102,12 @@ outcome of 85% accuracy. Additional performance calibration was added to the
 deployed model that focused on reducing false positives and ignoring “unknown”
 keywords.
 
-![Deployment2](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![Deployment2](incrementBikeCommand_inferencing/assets/DeploymentOptimization.jpg)
 
 The final experiment of comparing the two audio classification models clearly
 demonstrated the preference for the MFCC model when working with the human voice.
 
-![MFCCvsMFE](incrementBikeCommand_inferencing/assets/smartHelmet_cover.jpg)
+![MFCCvsMFE](incrementBikeCommand_inferencing/assets/MFCCvsMFE.jpg)
 
 Because the training dataset was purposefully difficult, with a large variety of accents,
 dialects, and background noise in the recordings, the live performance of the model was
